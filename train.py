@@ -35,13 +35,13 @@ def main():
                         help='save frequency')
     parser.add_argument('--grad_clip', type=float, default=5.,
                         help='clip gradients at this value')
-    parser.add_argument('--learning_rate', type=float, default=0.002,
+    parser.add_argument('--learning_rate', type=float, default=0.5,
                         help='learning rate')
     parser.add_argument('--decay_rate', type=float, default=0.97,
                         help='decay rate for rmsprop')
-    parser.add_argument('--output_keep_prob', type=float, default=1.0,
+    parser.add_argument('--output_keep_prob', type=float, default=0.7,
                         help='probability of keeping weights in the hidden layer')
-    parser.add_argument('--input_keep_prob', type=float, default=1.0,
+    parser.add_argument('--input_keep_prob', type=float, default=0.7,
                         help='probability of keeping weights in the input layer')
     parser.add_argument('--init_from', type=str, default=None,
                         help="""continue training from saved model at this path. Path must contain files saved by previous training process:
