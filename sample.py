@@ -1,4 +1,4 @@
-from __future__ import print_function
+#from __future__ import print_function
 import tensorflow as tf
 
 import argparse
@@ -11,11 +11,14 @@ from six import text_type
 
 
 def main():
+    # Turn off TensorFlow warning messages in program output
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
     parser = argparse.ArgumentParser(
                        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--save_dir', type=str, default='save',
                         help='model directory to store checkpointed models')
-    parser.add_argument('-n', type=int, default=300,
+    parser.add_argument('-n', type=int, default=1000,
                         help='number of characters to sample')
     parser.add_argument('--prime', type=text_type, default=u' ',
                         help='prime text')
@@ -39,8 +42,15 @@ def sample(args):
         ckpt = tf.train.get_checkpoint_state(args.save_dir)
         if ckpt and ckpt.model_checkpoint_path:
             saver.restore(sess, ckpt.model_checkpoint_path)
+            text_sample=model.sample(sess, chars, vocab, args.n, args.prime,
+                               args.sample).encode('utf-8')
+            f = open('lyric.txt', 'ab')
+            f.write(text_sample)
+            f.close()
+            '''
             print(model.sample(sess, chars, vocab, args.n, args.prime,
                                args.sample).encode('utf-8'))
+            '''
 
 if __name__ == '__main__':
     main()

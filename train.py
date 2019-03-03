@@ -1,4 +1,5 @@
-from __future__ import print_function
+#from __future__ import print_function
+
 import tensorflow as tf
 
 import argparse
@@ -11,9 +12,12 @@ from model import Model
 
 
 def main():
+    # Turn off TensorFlow warning messages in program output
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
     parser = argparse.ArgumentParser(
                         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('--data_dir', type=str, default='data/1989lyrics',
+    parser.add_argument('--data_dir', type=str, default='data/reputationlyrics',
                         help='data directory containing input.txt')
     parser.add_argument('--save_dir', type=str, default='save',
                         help='directory to store checkpointed models')
